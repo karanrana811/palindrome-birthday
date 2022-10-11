@@ -59,7 +59,6 @@ function dateVariations(date) {
 
 function checkPalindromeForDates(date) {
     var dateVariationArray = dateVariations(date)
-    console.log(dateVariationArray);
     var palindromeOrNot = []
     for (var i = 0; i < dateVariationArray.length; i++) {
         if (checkForPalindrome(dateVariationArray[i])) {
@@ -90,6 +89,29 @@ function findNextDate(date) {
     } else {
         nextYear = nextYear
     }
+    
+    if (date.day === 28) {
+        if (date.year % 4 === 0) {
+            if (date.year % 100 === 0) {
+                if (date.year % 400 === 0) {
+                    nextDay = 29;
+                    nextMonth = 2;
+                } else {
+                    nextDay = 1;
+                    nextMonth = 3;
+                }
+            } else {
+                nextDay = 29;
+                nextMonth = 2;
+            }
+        } else {
+            nextDay = 1;
+            nextMonth = 3;
+        }
+    } else {
+        date.day = date.day
+    }
+
     var nextDate = {
         day: nextDay,
         month: nextMonth,
@@ -100,21 +122,27 @@ function findNextDate(date) {
 
 
 function findNextPalindrome(date) {
-    var palindromeOrNot = checkPalindromForDates(date);
-    for (var i; i < palindromeOrNot.length; i++) {
-        if (palindromeOrNot[i] === true) {
-            console.log('Your birthday is a palindrome!')
-        } else {
+    var nextDate = findNextDate(date);
+    var counter = 0;
 
+    while (1) {
+        counter++;
+        var dateStr = dateToString(nextDate)
+        var palindromeOrNot = checkPalindromeForDates(dateStr);
+        for (var i = 0; i < palindromeOrNot.length; i++) {
+            if (palindromeOrNot[i] === true) {
+                return [counter, nextDate];
+            }
         }
+        nextDate = findNextDate(nextDate);
     }
 }
 
 var date = {
-    day: 28,
-    month: 4,
-    year: 2004
+    day: 31,
+    month: 12,
+    year: 1604
 }
 
-console.log(findNextDate(date))
+console.log(findNextPalindrome(date))
 
