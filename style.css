@@ -1,0 +1,26 @@
+div {
+    text-align:center;
+}
+
+h1 {
+    display: block;
+}
+
+label {
+    display: block;
+    margin: auto auto 1rem;
+
+}
+
+input {
+    display: block;
+    margin:0 auto;
+
+}
+
+button {
+    display: block;
+    margin: 1rem auto;
+
+}
+
