@@ -130,7 +130,7 @@ function findNextPalindrome(date) {
         var dateStr = dateToString(nextDate)
         var palindromeOrNot = checkPalindromeForDates(dateStr);
         for (var i = 0; i < palindromeOrNot.length; i++) {
-            if (palindromeOrNot[i] === true) {
+            if (palindromeOrNot[i]) {
                 return [counter, nextDate];
             }
         }
