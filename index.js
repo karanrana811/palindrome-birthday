@@ -2,6 +2,7 @@ const button = document.querySelector(".show-button");
 const input = document.querySelector("#date-input");
 const message = document.querySelector(".message");
 
+
 function reverseString(str) {
     var reversedStr = str.split('').reverse().join('');
     return reversedStr;
@@ -75,8 +76,6 @@ function findNextDate(date) {
     var nextMonth = date.month;
     var nextYear = date.year;
     var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-    // for (var i=0; i < daysInMonth.length; i++) {
     if (nextDay > daysInMonth[nextMonth - 1]) {
         nextDay = 1;
         nextMonth = nextMonth + 1;
@@ -89,7 +88,7 @@ function findNextDate(date) {
     } else {
         nextYear = nextYear
     }
-    
+
     if (date.day === 28) {
         if (date.year % 4 === 0) {
             if (date.year % 100 === 0) {
@@ -124,25 +123,28 @@ function findNextDate(date) {
 function findNextPalindrome(date) {
     var nextDate = findNextDate(date);
     var counter = 0;
-
     while (1) {
         counter++;
-        var dateStr = dateToString(nextDate)
-        var palindromeOrNot = checkPalindromeForDates(dateStr);
-        for (var i = 0; i < palindromeOrNot.length; i++) {
-            if (palindromeOrNot[i]) {
-                return [counter, nextDate];
+        var palindromeOrNot = checkPalindromeForDates(nextDate);
+        for (let i = 0; i < palindromeOrNot.length; i++) {
+            if (palindromeOrNot[i] === true) {
+                return [counter, nextDate, palindromeOrNot];
             }
         }
         nextDate = findNextDate(nextDate);
     }
+    
 }
 
 var date = {
-    day: 31,
-    month: 12,
-    year: 1604
+    day: 02,
+    month: 02,
+    year: 2020
 }
 
-console.log(findNextPalindrome(date))
+function clickhandler() {
+    console.log(input.value);
+}
+console.log(findNextPalindrome(date));
 
+button.addEventListener('click', clickhandler);
