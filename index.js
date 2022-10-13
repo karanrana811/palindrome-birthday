@@ -2,6 +2,11 @@ const button = document.querySelector(".show-button");
 const input = document.querySelector("#date-input");
 const message = document.querySelector(".message");
 
+var date = {
+    day: 29,
+    month: 10,
+    year: 2003
+}
 
 function reverseString(str) {
     var reversedStr = str.split('').reverse().join('');
@@ -40,9 +45,8 @@ function dateToString(date) {
         year: yearStr
     }
     return dateStr;
-
-
 }
+
 
 function dateVariations(date) {
     var dateStr = dateToString(date);
@@ -70,6 +74,7 @@ function checkPalindromeForDates(date) {
     }
     return palindromeOrNot;
 }
+
 
 function findNextDate(date) {
     var nextDay = date.day + 1;
@@ -111,41 +116,31 @@ function findNextDate(date) {
         } else {
             date.day = date.day
         }
-
-        var nextDate = {
-            day: nextDay,
-            month: nextMonth,
-            year: nextYear
-        }
-        return nextDate;
     }
+    var nextDate = {
+        day: nextDay,
+        month: nextMonth,
+        year: nextYear
+    }
+    return nextDate;
 };
 
 
 function findNextPalindrome(date) {
     var nextDate = findNextDate(date);
     var counter = 0;
-    while (counter < 100) {
+    while (1) {
         counter = counter + 1;
         var palindromeOrNot = checkPalindromeForDates(nextDate);
         for (let i = 0; i < palindromeOrNot.length; i++) {
-            if (palindromeOrNot[i]) {
-                console.log(counter);
+            if (palindromeOrNot[i] === true) {
+                return [counter, nextDate];
             }
-            console.log(counter, nextDate)
         }
         nextDate = findNextDate(nextDate);
     }
-    // console.log(counter, nextDate, palindromeOrNot) 
 }
 
-var date = {
-    day: 31,
-    month: 12,
-    year: 1999
-}
-
-console.log(findNextPalindrome(date))
 
 button.addEventListener('click', function clickhandler() {
     var userInput = input.value;
@@ -159,10 +154,9 @@ button.addEventListener('click', function clickhandler() {
     for (var i = 0; i < palindromeOrNot.length; i++) {
         if (palindromeOrNot[i] === true) {
             message.innerText = 'is palindrome';
-            break;
         } else {
-            message.innerText = "isn't palindrome";
+            var nextPalindrome = findNextPalindrome(date);
+            message.innerText = "isn't palindrome " + nextPalindrome[0] + " " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year;
         }
     }
 });
-// yyyyddmm
