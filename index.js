@@ -89,62 +89,80 @@ function findNextDate(date) {
         nextYear = nextYear
     }
 
-    if (date.day === 28) {
-        if (date.year % 4 === 0) {
-            if (date.year % 100 === 0) {
-                if (date.year % 400 === 0) {
+    if (date.month === 2) {
+        if (date.day === 28) {
+            if (date.year % 4 === 0) {
+                if (date.year % 100 === 0) {
+                    if (date.year % 400 === 0) {
+                        nextDay = 29;
+                        nextMonth = 2;
+                    } else {
+                        nextDay = 1;
+                        nextMonth = 3;
+                    }
+                } else {
                     nextDay = 29;
                     nextMonth = 2;
-                } else {
-                    nextDay = 1;
-                    nextMonth = 3;
                 }
             } else {
-                nextDay = 29;
-                nextMonth = 2;
+                nextDay = 1;
+                nextMonth = 3;
             }
         } else {
-            nextDay = 1;
-            nextMonth = 3;
+            date.day = date.day
         }
-    } else {
-        date.day = date.day
-    }
 
-    var nextDate = {
-        day: nextDay,
-        month: nextMonth,
-        year: nextYear
+        var nextDate = {
+            day: nextDay,
+            month: nextMonth,
+            year: nextYear
+        }
+        return nextDate;
     }
-    return nextDate;
-}
+};
 
 
 function findNextPalindrome(date) {
     var nextDate = findNextDate(date);
     var counter = 0;
-    while (1) {
-        counter++;
+    while (counter < 100) {
+        counter = counter + 1;
         var palindromeOrNot = checkPalindromeForDates(nextDate);
         for (let i = 0; i < palindromeOrNot.length; i++) {
-            if (palindromeOrNot[i] === true) {
-                return [counter, nextDate, palindromeOrNot];
+            if (palindromeOrNot[i]) {
+                console.log(counter);
             }
+            console.log(counter, nextDate)
         }
         nextDate = findNextDate(nextDate);
     }
-    
+    // console.log(counter, nextDate, palindromeOrNot) 
 }
 
 var date = {
-    day: 02,
-    month: 02,
-    year: 2020
+    day: 31,
+    month: 12,
+    year: 1999
 }
 
-function clickhandler() {
-    console.log(input.value);
-}
-console.log(findNextPalindrome(date));
+console.log(findNextPalindrome(date))
 
-button.addEventListener('click', clickhandler);
+button.addEventListener('click', function clickhandler() {
+    var userInput = input.value;
+    var dateWithoutHyphen = userInput.replaceAll("-", "");
+    var date = {
+        day: Number(dateWithoutHyphen[6] + dateWithoutHyphen[7]),
+        month: Number(dateWithoutHyphen[4] + dateWithoutHyphen[5]),
+        year: Number(dateWithoutHyphen[0] + dateWithoutHyphen[1] + dateWithoutHyphen[2] + dateWithoutHyphen[3])
+    }
+    var palindromeOrNot = checkPalindromeForDates(date);
+    for (var i = 0; i < palindromeOrNot.length; i++) {
+        if (palindromeOrNot[i] === true) {
+            message.innerText = 'is palindrome';
+            break;
+        } else {
+            message.innerText = "isn't palindrome";
+        }
+    }
+});
+// yyyyddmm
