@@ -3,9 +3,9 @@ const input = document.querySelector("#date-input");
 const message = document.querySelector(".message");
 
 var date = {
-    day: 29,
-    month: 10,
-    year: 2003
+    day: 5,
+    month: 2,
+    year: 2030
 }
 
 function reverseString(str) {
@@ -125,6 +125,52 @@ function findNextDate(date) {
     return nextDate;
 };
 
+function findPreviousDate(date) {
+    var previousDay = date.day - 1;
+    var previousMonth = date.month;
+    var previousYear = date.year;
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    if (previousDay < 1) {
+        previousMonth = previousMonth - 1;
+        if (previousMonth === 0) {
+            previousDay = daysInMonth.slice(-1)[0];
+            previousYear = previousYear - 1;
+            previousMonth = 12;
+        } else {
+            previousDay = daysInMonth[previousMonth - 1];
+        }
+    } else {
+        previousDay = previousDay;
+    }
+
+    if (date.month === 3) {
+        if (date.day === 1)
+            if (date.year % 4 === 0) {
+                if (date.year % 100 === 0) {
+                    if (date.year % 400 === 0) {
+                        previousDay = 29;
+                        previousMonth = 2;
+                    } else {
+                        previousDay = 28;
+                        previousMonth = 2;
+                    }
+                } else {
+                    previousDay = 29;
+                    previousMonth = 2;
+                }
+            }
+    }
+
+    var previousDate = {
+        day: previousDay,
+        month: previousMonth,
+        year: previousYear
+    }
+    return previousDate;
+}
+
+
 
 function findNextPalindrome(date) {
     var nextDate = findNextDate(date);
@@ -141,6 +187,24 @@ function findNextPalindrome(date) {
     }
 }
 
+function findPreviousPalindrome(date) {
+    var previousDate = findPreviousDate(date);
+    var counter = 0;
+    while (1) {
+        counter++;
+        var palindromeOrNot = checkPalindromeForDates(previousDate);
+        for (let i = 0; i < palindromeOrNot.length; i++) {
+            if (palindromeOrNot[i] === true) {
+                return [counter, previousDate];
+            }
+        }
+        previousDate = findPreviousDate(previousDate);
+    }
+}
+
+function isCounterOne(counter) {
+    return (counter === 1 ? 'day.' : 'days.')
+}
 
 button.addEventListener('click', function clickhandler() {
     var userInput = input.value;
@@ -156,7 +220,22 @@ button.addEventListener('click', function clickhandler() {
             message.innerText = 'is palindrome';
         } else {
             var nextPalindrome = findNextPalindrome(date);
-            message.innerText = "isn't palindrome " + nextPalindrome[0] + " " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year;
+            var previousPalindrome = findPreviousPalindrome(date);
+            
+            if (previousPalindrome[0] - nextPalindrome[0] === 1) {
+                message.innerText = "Your birthdate is equally distant from the nearest future palindrome which is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " and the nearest past palindrome which is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " with both being " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " apart from your birthdate.";
+            } else {             
+                if (nextPalindrome[0] > previousPalindrome[0]) {
+                    message.innerText = "Your birthdate is not a palindrome. The nearest palindrome is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". You missed it by " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
+                } else {
+                    message.innerText = "Your birthday is not a palindrome. The nearest palindrome is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". You missed it by " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
+                }
+            }
+
         }
     }
 });
+
+// var array = [1, 2, 3, 4, 5, 6, 7]
+
+// console.log(typeof array.slice(-1)[0]) 3 2 2030, 4 2 2040
