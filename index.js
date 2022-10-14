@@ -255,6 +255,3 @@ button.addEventListener('click', function clickhandler() {
     }, 4000)
 });
 
-// var array = [1, 2, 3, 4, 5, 6, 7]
-
-// console.log(typeof array.slice(-1)[0]) 3 2 2030, 4 2 2040
