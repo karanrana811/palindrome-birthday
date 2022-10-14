@@ -1,4 +1,4 @@
-div {
+.container {
     text-align:center;
 }
 
@@ -24,3 +24,15 @@ button {
 
 }
 
+.hiddenGif {
+    display: block;
+    width: 50%;
+    margin: 2rem auto;
+}
+
+img {
+    display: block;
+    width: 75%;
+    margin: 2rem auto;
+    border-radius: 1rem;
+}

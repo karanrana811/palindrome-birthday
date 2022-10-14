@@ -1,6 +1,17 @@
 const button = document.querySelector(".show-button");
 const input = document.querySelector("#date-input");
 const message = document.querySelector(".message");
+const gif = document.querySelector(".hiddenGif")
+
+gif.style.display = "none"
+
+function showGif() {
+    gif.style.display = "block"
+}
+
+function hideGif() {
+    gif.style.display = "none"
+}
 
 var date = {
     day: 5,
@@ -207,6 +218,7 @@ function isCounterOne(counter) {
 }
 
 button.addEventListener('click', function clickhandler() {
+    showGif();
     var userInput = input.value;
     var dateWithoutHyphen = userInput.replaceAll("-", "");
     var date = {
@@ -215,25 +227,32 @@ button.addEventListener('click', function clickhandler() {
         year: Number(dateWithoutHyphen[0] + dateWithoutHyphen[1] + dateWithoutHyphen[2] + dateWithoutHyphen[3])
     }
     var palindromeOrNot = checkPalindromeForDates(date);
-    for (var i = 0; i < palindromeOrNot.length; i++) {
-        if (palindromeOrNot[i] === true) {
-            message.innerText = 'is palindrome';
-        } else {
-            var nextPalindrome = findNextPalindrome(date);
-            var previousPalindrome = findPreviousPalindrome(date);
-            
-            if (previousPalindrome[0] - nextPalindrome[0] === 1) {
-                message.innerText = "Your birthdate is equally distant from the nearest future palindrome which is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " and the nearest past palindrome which is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " with both being " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " apart from your birthdate.";
-            } else {             
-                if (nextPalindrome[0] > previousPalindrome[0]) {
-                    message.innerText = "Your birthdate is not a palindrome. The nearest palindrome is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". You missed it by " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
+    setTimeout(() => {
+        hideGif();
+        for (var i = 0; i < palindromeOrNot.length; i++) {
+            if (palindromeOrNot[i] === true) {
+                message.innerText = 'is palindrome';
+            } else {
+                if (userInput === "") {
+                    message.innerText = "Please fill out a valid date."
                 } else {
-                    message.innerText = "Your birthday is not a palindrome. The nearest palindrome is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". You missed it by " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
+                    var nextPalindrome = findNextPalindrome(date);
+                    var previousPalindrome = findPreviousPalindrome(date);
+
+                    if (previousPalindrome[0] - nextPalindrome[0] === 1) {
+                        message.innerText = "Your birthdate is equally distant from the nearest future palindrome which is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " and the nearest past palindrome which is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " with both being " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " apart from your birthdate.";
+                    } else {
+                        if (nextPalindrome[0] > previousPalindrome[0]) {
+                            message.innerText = "Your birthdate is not a palindrome. The nearest palindrome is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". You missed it by " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
+                        } else {
+                            message.innerText = "Your birthday is not a palindrome. The nearest palindrome is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". You missed it by " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
+                        }
+                    }
+
                 }
             }
-
         }
-    }
+    }, 4000)
 });
 
 // var array = [1, 2, 3, 4, 5, 6, 7]
