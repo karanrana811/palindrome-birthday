@@ -1,38 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;1,100&display=swap");
+
+:root {
+    --primary-color: #22D8BE;
+    --light-color: #eafcf9;
+    --dark-color: #b7f4eb;
+}
+
+html {
+    height: 100%;
+    max-width: 100%;
+}
+
+body {
+    margin: 0px auto;
+    font-family: "Prompt", sans-serif;
+    letter-spacing: 2px;
+    font-weight: 200;
+    background-color: var(--primary-color);
+    text-align: center;
+    max-width: 100vw;
+    max-height: 100%;
+}
+
 .container {
     text-align:center;
+    width: 100vw;
 }
 
 h1 {
     display: block;
+    margin-top: 3rem;
+    letter-spacing: 5px;
 }
 
 label {
     display: block;
     margin: auto auto 1rem;
+    font-weight: bolder;
 
 }
 
 input {
     display: block;
     margin:0 auto;
+    padding: 0.2rem;
+    border: 0;
+    border-radius: 0.5rem;
 
 }
 
 button {
     display: block;
     margin: 1rem auto;
+    font-family: "Prompt", sans-serif;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    border: 0;
+    letter-spacing: 2px;
+    
 
 }
 
 .hiddenGif {
+    text-align: center;
     display: block;
-    width: 50%;
-    margin: 2rem auto;
-}
-
-img {
-    display: block;
-    width: 75%;
     margin: 2rem auto;
     border-radius: 1rem;
+}
+
+.gif {
+    display: block;
+    max-width: 60%;
+    margin: 2rem auto;
+    border-radius: 1rem;
+}
+
+.message {
+    font-weight: 900;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+.footer-container {
+    width: 50%;
+    margin: auto auto 0;
+    text-align: center;
+    bottom: 0;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    color: white;
+    position: absolute;
+    left: 25%;
+}
+
+.sm-logo {
+    margin: 1rem auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    width: 30px;
+}
+
+.social-media-list {
+    padding: 0 0;
+    margin: auto;
+    white-space: nowrap;
+    width:fit-content;
+}
+
+ul li {
+    list-style: none;
+    display: inline;
+    padding: 1rem 1rem 0;
+}
+
+@media screen and (max-width: 599px) {
+    body {
+        font-size: 2.5vw;
+    }
+
+    .sm-logo {
+        padding: 0 4px;
+        width: 20px;
+        
+    }
+    
+    ul li {
+        list-style: none;
+        display: inline;
+        padding: 0;
+    }
+
+    .hiddenGif {
+        text-align: center;
+        display: block;
+        width: 50%;
+        margin: 2rem auto;
+        border-radius: 1rem;
+    }
 }

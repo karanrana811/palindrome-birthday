@@ -231,27 +231,27 @@ button.addEventListener('click', function clickhandler() {
         hideGif();
         for (var i = 0; i < palindromeOrNot.length; i++) {
             if (palindromeOrNot[i] === true) {
-                message.innerText = 'is palindrome';
+                message.innerText = 'YOUR BIRTHDATE IS A PALINDROME!';
             } else {
                 if (userInput === "") {
-                    message.innerText = "Please fill out a valid date."
+                    message.innerText = "PLEASE FILL OUT A VALID DATE"
                 } else {
                     var nextPalindrome = findNextPalindrome(date);
                     var previousPalindrome = findPreviousPalindrome(date);
 
                     if (previousPalindrome[0] - nextPalindrome[0] === 1) {
-                        message.innerText = "Your birthdate is equally distant from the nearest future palindrome which is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " and the nearest past palindrome which is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " with both being " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " apart from your birthdate.";
+                        message.innerText = "YOUR BIRTHDATE IS EQUALLY DISTANT FROM THE NEAREST FUTURE PALINDROME WHICH IS " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " AND THE NEARES PAST PALINDROME WHICH IS " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " WITH BOTH BEING " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " APART FROM YOUR BIRTHDATE";
                     } else {
                         if (nextPalindrome[0] > previousPalindrome[0]) {
-                            message.innerText = "Your birthdate is not a palindrome. The nearest palindrome is " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". You missed it by " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
+                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". YOU MISSED IT BY " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
                         } else {
-                            message.innerText = "Your birthday is not a palindrome. The nearest palindrome is " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". You missed it by " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
+                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". YOU MISSED IT BY " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
                         }
                     }
 
                 }
             }
         }
-    }, 4000)
+    }, 2500)
 });
 
