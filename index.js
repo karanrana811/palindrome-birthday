@@ -214,7 +214,7 @@ function findPreviousPalindrome(date) {
 }
 
 function isCounterOne(counter) {
-    return (counter === 1 ? 'day.' : 'days.')
+    return (counter === 1 ? 'DAY.' : 'DAYS.')
 }
 
 button.addEventListener('click', function clickhandler() {
