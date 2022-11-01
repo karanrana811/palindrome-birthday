@@ -243,9 +243,9 @@ button.addEventListener('click', function clickhandler() {
                         message.innerText = "YOUR BIRTHDATE IS EQUALLY DISTANT FROM THE NEAREST FUTURE PALINDROME WHICH IS " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + " AND THE NEARES PAST PALINDROME WHICH IS " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + " WITH BOTH BEING " + nextPalindrome[0] + isCounterOne(previousPalindrome[0]) + " APART FROM YOUR BIRTHDATE";
                     } else {
                         if (nextPalindrome[0] > previousPalindrome[0]) {
-                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". YOU MISSED IT BY " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
+                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + previousPalindrome[1].day + "-" + previousPalindrome[1].month + "-" + previousPalindrome[1].year + ". YOU MISSED BY " + previousPalindrome[0] + " " + isCounterOne(previousPalindrome[0]);
                         } else {
-                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". YOU MISSED IT BY " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
+                            message.innerText = "YOUR BIRTHDATE IS NOT A PALINDROME. THE NEAREST PALINDROME IS " + nextPalindrome[1].day + "-" + nextPalindrome[1].month + "-" + nextPalindrome[1].year + ". YOU MISSED BY " + nextPalindrome[0] + " " + isCounterOne(nextPalindrome[0]);
                         }
                     }
 
